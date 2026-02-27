@@ -1,5 +1,4 @@
-# 🏥 Gilead Vital Signs  
-### Secure Medical Records Application
+# Secure Medical Records Application
 
 A secure, privacy-focused medical records web application built for **Winners Chapel International Arlington – Gilead Health Ministry**.  
 The system enables encrypted patient record management, visit documentation, and controlled staff access — designed for real-world church health department workflows.
