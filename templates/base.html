@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Vital Signs - Medical Records{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Additional page-specific styles can go here */
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="{{ url_for('index') }}" class="logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="WCIA" class="header-logo-img">
+                <div>
+                    <div class="logo-text">Gilead - Vital Signs</div>
+                    <div class="logo-subtitle">Winners Chapel Int'l Arlington</div>
+                </div>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">🏠 Home</a></li>
+                    <li><a href="{{ url_for('patient_auth') }}">📋 Patient Records</a></li>
+                    <li><a href="{{ url_for('staff_admin') }}">👥 Staff Admin</a></li>
+                    {% if session.get('staff_number') or session.get('is_admin') %}
+                    <li><a href="{{ url_for('logout') }}">🚪 Logout</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} animate-fade-in">
+                        {% if category == 'success' %}✅
+                        {% elif category == 'danger' %}❌
+                        {% elif category == 'warning' %}⚠️
+                        {% else %}ℹ️{% endif %}
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Winners Chapel International Arlington - Gilead Vital Signs. All patient data is encrypted and secure.</p>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

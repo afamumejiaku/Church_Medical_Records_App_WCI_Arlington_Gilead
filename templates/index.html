@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - Gilead Vital Signs{% endblock %}
+
+{% block content %}
+<section class="welcome-hero animate-fade-in">
+    <div class="church-logo-container">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Winners Chapel International Arlington" class="church-logo">
+    </div>
+    <h1 class="church-name">Winners Chapel International Arlington</h1>
+    <h2 class="vital-signs-title">✨ Gilead - Vital Signs ✨</h2>
+    <p class="text-muted" style="max-width: 600px; margin: 0 auto;">
+        A secure medical records management system for our congregation. 
+        All patient data is encrypted and protected.
+    </p>
+    
+    <div class="welcome-links">
+        <a href="{{ url_for('patient_auth') }}" class="welcome-link-card">
+            <div class="icon">📋</div>
+            <h3>Patient Records</h3>
+            <p>Access, view, and update patient medical records and visit history.</p>
+            <span class="btn btn-primary">Access Records →</span>
+        </a>
+        
+        <a href="{{ url_for('staff_admin') }}" class="welcome-link-card">
+            <div class="icon">👥</div>
+            <h3>Staff Administration</h3>
+            <p>Manage staff accounts and administrative settings.</p>
+            <span class="btn btn-outline">Staff Portal →</span>
+        </a>
+    </div>
+</section>
+
+<section class="mt-4 animate-fade-in" style="animation-delay: 0.2s;">
+    <div class="card">
+        <div class="card-header">
+            <h3>🔐 Security Features</h3>
+        </div>
+        <div class="card-body">
+            <div class="patient-info-grid">
+                <div class="info-item">
+                    <div class="label">Data Encryption</div>
+                    <div class="value" style="font-size: 1rem;">Patient records are encrypted using credentials-based encryption</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Access Control</div>
+                    <div class="value" style="font-size: 1rem;">Only authorized staff can access patient information</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">HIPAA Compliant</div>
+                    <div class="value" style="font-size: 1rem;">Designed with healthcare privacy standards in mind</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Audit Trail</div>
+                    <div class="value" style="font-size: 1rem;">All access and modifications are logged</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-4 animate-fade-in" style="animation-delay: 0.4s;">
+    <div class="card">
+        <div class="card-body text-center">
+            <h4>🚀 Quick Start Guide</h4>
+            <p class="text-muted mt-2">
+                <strong>First time?</strong> Contact your system administrator for staff credentials.<br>
+                Default admin login: Staff Number: <code>ADMIN001</code>, Last Name: <code>Administrator</code>
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

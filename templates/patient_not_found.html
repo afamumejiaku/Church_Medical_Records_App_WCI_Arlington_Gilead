@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Not Found - Vital Signs{% endblock %}
+
+{% block content %}
+<div class="card animate-fade-in" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-header" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+        <h2>⚠️ Patient Not Found</h2>
+    </div>
+    <div class="card-body text-center">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">🔍</div>
+        
+        <p class="mb-3">
+            No patient record was found matching the provided information:
+        </p>
+        
+        <div class="info-item mb-3" style="text-align: left;">
+            <div class="label">First Name</div>
+            <div class="value">{{ first_name }}</div>
+        </div>
+        
+        <div class="info-item mb-3" style="text-align: left;">
+            <div class="label">Last Name</div>
+            <div class="value">{{ last_name }}</div>
+        </div>
+        
+        <div class="info-item mb-3" style="text-align: left;">
+            <div class="label">Date of Birth</div>
+            <div class="value">{{ dob }}</div>
+        </div>
+        
+        <hr class="mt-4 mb-4">
+        
+        <h4 class="mb-3">What would you like to do?</h4>
+        
+        <div class="d-flex gap-2 justify-center flex-wrap">
+            <a href="{{ url_for('create_patient') }}" class="btn btn-success btn-lg">
+                ➕ Create New Patient Record
+            </a>
+            
+            <a href="{{ url_for('patient_auth') }}" class="btn btn-secondary btn-lg">
+                🔄 Try Again
+            </a>
+        </div>
+        
+        <div class="mt-4 text-muted">
+            <small>
+                💡 <strong>Tip:</strong> Double-check the spelling and date of birth. 
+                The system allows first and last names to be swapped.
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}

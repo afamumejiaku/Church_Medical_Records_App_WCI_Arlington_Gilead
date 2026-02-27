@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Add Visit - Vital Signs{% endblock %}
+
+{% block content %}
+<div class="card animate-fade-in" style="max-width: 700px; margin: 0 auto;">
+    <div class="card-header">
+        <h2>➕ Record New Visit</h2>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-info mb-3">
+            📋 Recording visit for patient currently in session. All vital signs are optional 
+            but recommended for complete medical records.
+        </div>
+        
+        <form method="POST" action="{{ url_for('add_visit') }}">
+            <h4 class="mb-3">📅 Visit Details</h4>
+            
+            <div class="form-group">
+                <label class="form-label required">Visit Date</label>
+                <input type="date" name="visit_date" class="form-input" 
+                       value="{{ now.strftime('%Y-%m-%d') if now else '' }}" required>
+            </div>
+            
+            <hr class="mt-4 mb-4">
+            
+            <h4 class="mb-3">📊 Vital Signs</h4>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="form-group">
+                    <label class="form-label">⚖️ Weight</label>
+                    <input type="text" name="weight" class="form-input" 
+                           placeholder="e.g., 150 lbs">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">🌡️ Temperature</label>
+                    <input type="text" name="temperature" class="form-input" 
+                           placeholder="e.g., 98.6°F">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">💓 Blood Pressure</label>
+                    <input type="text" name="blood_pressure" class="form-input" 
+                           placeholder="e.g., 120/80">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">💗 Pulse</label>
+                    <input type="text" name="pulse" class="form-input" 
+                           placeholder="e.g., 72 bpm">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">🫁 Respiration</label>
+                    <input type="text" name="respiration" class="form-input" 
+                           placeholder="e.g., 16/min">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">😣 Pain Level (0-10)</label>
+                    <select name="pain_level" class="form-input">
+                        <option value="">-- Select --</option>
+                        <option value="0">0 - No Pain</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5 - Moderate</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10 - Worst Pain</option>
+                    </select>
+                </div>
+            </div>
+            
+            <hr class="mt-4 mb-4">
+            
+            <h4 class="mb-3">📝 Additional Notes</h4>
+            
+            <div class="form-group">
+                <label class="form-label">Notes / Comments</label>
+                <textarea name="notes" class="form-input" 
+                          placeholder="Enter any additional observations, symptoms, or notes about this visit..."
+                          rows="5"></textarea>
+            </div>
+            
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-success btn-lg">
+                    ✅ Save Visit Record
+                </button>
+                
+                <a href="{{ url_for('patient_records') }}" class="btn btn-secondary btn-lg">
+                    ❌ Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card mt-3 animate-fade-in" style="max-width: 700px; margin: 0 auto;">
+    <div class="card-body">
+        <h5>💡 Tips for Recording Vitals</h5>
+        <ul class="text-muted" style="margin-left: 1.5rem;">
+            <li><strong>Weight:</strong> Include units (lbs or kg)</li>
+            <li><strong>Temperature:</strong> Include units (°F or °C)</li>
+            <li><strong>Blood Pressure:</strong> Format as systolic/diastolic (e.g., 120/80)</li>
+            <li><strong>Pulse:</strong> Beats per minute (bpm)</li>
+            <li><strong>Respiration:</strong> Breaths per minute</li>
+            <li><strong>Pain Level:</strong> Use 0-10 scale (0 = no pain, 10 = worst pain)</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Auto-set today's date if not already set
+    document.addEventListener('DOMContentLoaded', function() {
+        const dateInput = document.querySelector('input[name="visit_date"]');
+        if (!dateInput.value) {
+            dateInput.valueAsDate = new Date();
+        }
+    });
+</script>
+{% endblock %}

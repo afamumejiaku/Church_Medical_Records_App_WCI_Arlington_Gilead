@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Patient - Vital Signs{% endblock %}
+
+{% block content %}
+<div class="card animate-fade-in" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-header">
+        <h2>➕ Create New Patient Record</h2>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-info">
+            <strong>ℹ️ Important:</strong> All fields are required. Patient data will be encrypted 
+            and can only be accessed using the patient's first name, last name, and date of birth.
+        </div>
+        
+        <form method="POST" action="{{ url_for('create_patient') }}">
+            <h4 class="mb-3">📝 Patient Information</h4>
+            
+            <div class="form-group">
+                <label class="form-label required">First Name</label>
+                <input type="text" name="first_name" class="form-input" 
+                       placeholder="Patient's first name" required
+                       value="{{ first_name if first_name else '' }}">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label required">Last Name</label>
+                <input type="text" name="last_name" class="form-input" 
+                       placeholder="Patient's last name" required
+                       value="{{ last_name if last_name else '' }}">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label required">Date of Birth</label>
+                <input type="date" name="dob" class="form-input" required
+                       value="{{ dob if dob else '' }}">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label required">Sex</label>
+                <select name="sex" class="form-input" required>
+                    <option value="">-- Select Sex --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+            </div>
+            
+            <hr class="mt-4 mb-4">
+            
+            <h4 class="mb-3">👨‍⚕️ Physician Assignment</h4>
+            
+            <div class="form-group">
+                <label class="form-label required">Physician Staff Number</label>
+                <input type="text" name="physician_number" class="form-input" 
+                       placeholder="e.g., STAFF001" required>
+                <small class="text-muted">Enter the staff number of the physician who will be seeing this patient.</small>
+            </div>
+            
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-success btn-lg">
+                    ✅ Create Patient Record
+                </button>
+                
+                <a href="{{ url_for('patient_auth') }}" class="btn btn-secondary btn-lg">
+                    ❌ Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card mt-3 animate-fade-in" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-body">
+        <h5>🔐 Data Security Notice</h5>
+        <p class="text-muted">
+            Patient records are encrypted using the patient's credentials (first name, last name, and DOB).
+            This ensures that:
+        </p>
+        <ul class="text-muted">
+            <li>Data can only be decrypted with the correct patient information</li>
+            <li>Even database administrators cannot read patient data without credentials</li>
+            <li>Patient privacy is protected at the database level</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Records - {{ patient.first_name }} {{ patient.last_name }}{% endblock %}
+
+{% block content %}
+<!-- Patient Information Card -->
+<div class="card animate-fade-in">
+    <div class="card-header">
+        <div class="patient-header">
+            <div>
+                <h2>🏥 {{ patient.first_name }} {{ patient.last_name }}</h2>
+                <p style="opacity: 0.9; margin-top: 0.25rem;">Patient Medical Record</p>
+            </div>
+            <div class="d-flex gap-1">
+                <a href="{{ url_for('add_visit') }}" class="btn btn-success">
+                    ➕ Add Visit
+                </a>
+                <a href="{{ url_for('clear_patient') }}" class="btn btn-secondary">
+                    🔄 Switch Patient
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <h4 class="mb-3">📋 Patient Information</h4>
+        <div class="patient-info-grid">
+            <div class="info-item">
+                <div class="label">Full Name</div>
+                <div class="value">{{ patient.first_name }} {{ patient.last_name }}</div>
+            </div>
+            <div class="info-item">
+                <div class="label">Date of Birth</div>
+                <div class="value">{{ patient.dob }}</div>
+            </div>
+            <div class="info-item">
+                <div class="label">Sex</div>
+                <div class="value">{{ patient.sex }}</div>
+            </div>
+            <div class="info-item">
+                <div class="label">Physician</div>
+                <div class="value">
+                    {% if physician %}
+                    Dr. {{ physician.first_name }} {{ physician.last_name }}
+                    {% else %}
+                    Not Assigned
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Visit History -->
+<div class="card mt-3 animate-fade-in" style="animation-delay: 0.2s;">
+    <div class="card-header">
+        <div class="d-flex justify-between align-center">
+            <h3>📊 Visit History</h3>
+            <span style="opacity: 0.9;">{{ visits|length }} visits on record</span>
+        </div>
+    </div>
+    <div class="card-body">
+        {% if visits %}
+            {% for visit in visits %}
+            <div class="visit-card">
+                <div class="visit-header">
+                    <div class="visit-date">📅 {{ visit.visit_date }}</div>
+                    <small class="text-muted">Recorded by: {{ visit.recorded_by }}</small>
+                </div>
+                <div class="visit-body">
+                    <div class="vitals-grid">
+                        <div class="vital-item">
+                            <div class="label">⚖️ Weight</div>
+                            <div class="value">{{ visit.weight or 'N/A' }}</div>
+                        </div>
+                        <div class="vital-item">
+                            <div class="label">🌡️ Temperature</div>
+                            <div class="value">{{ visit.temperature or 'N/A' }}</div>
+                        </div>
+                        <div class="vital-item">
+                            <div class="label">💓 Blood Pressure</div>
+                            <div class="value">{{ visit.blood_pressure or 'N/A' }}</div>
+                        </div>
+                        <div class="vital-item">
+                            <div class="label">💗 Pulse</div>
+                            <div class="value">{{ visit.pulse or 'N/A' }}</div>
+                        </div>
+                        <div class="vital-item">
+                            <div class="label">🫁 Respiration</div>
+                            <div class="value">{{ visit.respiration or 'N/A' }}</div>
+                        </div>
+                        <div class="vital-item">
+                            <div class="label">😣 Pain Level</div>
+                            <div class="value">{{ visit.pain_level or 'N/A' }}/10</div>
+                        </div>
+                    </div>
+                    
+                    {% if visit.notes %}
+                    <div class="visit-notes">
+                        <strong>📝 Notes:</strong><br>
+                        {{ visit.notes }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="text-center" style="padding: 3rem;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">📭</div>
+                <h4>No Visit Records</h4>
+                <p class="text-muted">This patient has no recorded visits yet.</p>
+                <a href="{{ url_for('add_visit') }}" class="btn btn-primary mt-2">
+                    ➕ Record First Visit
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Staff Info Footer -->
+<div class="card mt-3 animate-fade-in" style="animation-delay: 0.4s;">
+    <div class="card-body text-center">
+        <p class="text-muted">
+            🔐 Records accessed by: <strong>{{ session.get('staff_name', 'Staff') }}</strong> 
+            ({{ session.get('staff_number', '') }})
+        </p>
+    </div>
+</div>
+{% endblock %}

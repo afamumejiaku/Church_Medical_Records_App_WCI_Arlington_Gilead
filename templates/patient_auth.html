@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Access Patient Records - Vital Signs{% endblock %}
+
+{% block content %}
+<div class="card animate-fade-in" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-header">
+        <h2>📋 Access Patient Records</h2>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('patient_auth') }}">
+            <!-- Staff Authentication Section -->
+            <div class="login-section">
+                <h4 class="mb-3">👤 Staff Authentication</h4>
+                <p class="text-muted mb-3">Enter your staff credentials to continue.</p>
+                
+                <div class="form-group">
+                    <label class="form-label required">Staff Number</label>
+                    <input type="text" name="staff_number" class="form-input" 
+                           placeholder="e.g., STAFF001" required
+                           value="{{ session.get('staff_number', '') }}">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label required">Staff Last Name</label>
+                    <input type="text" name="staff_last_name" class="form-input" 
+                           placeholder="Your last name" required>
+                </div>
+            </div>
+            
+            <!-- Patient Identification Section -->
+            <div>
+                <h4 class="mb-3">🏥 Patient Identification</h4>
+                <p class="text-muted mb-3">Enter patient information to access their records.</p>
+                
+                <div class="form-group">
+                    <label class="form-label required">Patient First Name</label>
+                    <input type="text" name="patient_first" class="form-input" 
+                           placeholder="Patient's first name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label required">Patient Last Name</label>
+                    <input type="text" name="patient_last" class="form-input" 
+                           placeholder="Patient's last name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label required">Date of Birth</label>
+                    <input type="date" name="patient_dob" class="form-input" required>
+                </div>
+            </div>
+            
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                    🔓 Access Records
+                </button>
+            </div>
+        </form>
+        
+        <div class="mt-3 text-center">
+            <p class="text-muted">
+                <small>
+                    💡 <strong>Note:</strong> First and last names can be entered in either order.<br>
+                    The system will find the correct patient record.
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% if session.get('staff_number') %}
+<div class="card mt-3 animate-fade-in" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-body text-center">
+        <p class="text-muted">
+            Logged in as: <strong>{{ session.get('staff_name', 'Staff') }}</strong>
+        </p>
+        <a href="{{ url_for('logout') }}" class="btn btn-secondary btn-sm">
+            🚪 Logout
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
