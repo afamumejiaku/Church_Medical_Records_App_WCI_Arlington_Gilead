@@ -22,7 +22,6 @@ A secure medical web application for Winners Chapel International Arlington - Gi
 
 ### Welcome Page
 - Church name and Vital Signs branding
-- Algorithm image display
 - Quick access links to Patient Records and Staff Administration
 
 ### Patient Records Management
@@ -440,12 +439,14 @@ For technical issues or questions:
 - Review this documentation
 - Check the Troubleshooting section
 - Contact your system administrator
+- Email AfamUmejiaku@gmail.com
 
 ---
 
 ## 📄 License
 
 This application is provided for use by Winners Chapel International Arlington - Gilead Health Ministry.
+Designed and Maintained by Afamefuna Umejiaku
 
 ---
 
