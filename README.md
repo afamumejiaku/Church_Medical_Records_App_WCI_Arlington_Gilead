@@ -87,25 +87,41 @@ Each visit securely records:
 
 ---
 
-## 🔧 Installation
+## 📦 Packages & Libraries Used
 
-### Prerequisites
-- Python 3.8+
-- pip
-- Modern web browser
+### 🔧 Core Application
+- **Flask** – Lightweight Python web framework for routing, sessions, and request handling
+- **Jinja2** – HTML templating engine (bundled with Flask)
+- **Werkzeug** – WSGI utilities and security helpers (bundled with Flask)
 
-### Setup
+### 🔐 Security & Encryption
+- **cryptography**  
+  - Fernet symmetric encryption  
+  - PBKDF2 key derivation for credential-based encryption
+- **hashlib** *(Python standard library)* – Secure hashing functions
+- **secrets** *(Python standard library)* – Cryptographically secure random values
+- **os** *(Python standard library)* – Environment variables and filesystem access
 
-```bash
-git clone https://github.com/your-username/gilead-vital-signs.git
-cd gilead-vital-signs
-python -m venv venv
-source venv/bin/activate  # macOS/Linux
-# or venv\Scripts\activate on Windows
-pip install -r requirements.txt
-python app.py
+### 🗄️ Database
+- **sqlite3** *(Python standard library)* – Embedded relational database for offline-first storage
 
-## 📄 License and Acknowledgments
+### 🕒 Utilities
+- **datetime** *(Python standard library)* – Timestamping and date handling
+- **uuid** *(Python standard library)* – Unique identifier generation
+- **json** *(Python standard library)* – Structured data serialization
+
+### 🌐 Frontend
+- **HTML5 / CSS3** – User interface structure and styling
+- **Bootstrap (CSS)** *(via CDN)* – Responsive layout and UI components
+- **Font Awesome / Icon Fonts** *(via CDN)* – UI icons and visual indicators
+
+### 🚀 Deployment & Distribution
+- **gunicorn** – Production WSGI server for deployment
+- **PyInstaller** – Builds standalone desktop executables for offline use
+
+---
+
+## 📄License and Acknowledgments
 This application is provided for use by Winners Chapel International Arlington - Gilead Health Ministry.
 - Built with Flask (Python web framework)
 - SQLite database (free, no setup required)
